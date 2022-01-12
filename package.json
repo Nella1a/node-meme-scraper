@@ -1,0 +1,9 @@
+{
+  "name": "node-meme-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "repository": "https://github.com/Nella1a/node-meme-scraper.git",
+  "author": "Nella1a <m.allen@gmx.at>",
+  "license": "MIT"
+}
