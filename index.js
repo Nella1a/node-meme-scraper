@@ -1,29 +1,30 @@
-import pkg from 'axios';
+import axios from 'axios';
 import fs from 'fs';
 import https from 'https';
 import request from 'request';
 
 const regex = /src="https([^"]+)"/gi;
-const { get } = pkg;
-let arrayUrlImages = [];
+const { get } = axios;
+let arrayUrlImages;
 let arrayOfTenImages = [];
 let arrayConvertObjToString = [];
+let dataFromServer;
 let i = 0;
 
 //request data from server
 get('https://memegen-link-examples-upleveled.netlify.app/').then((response) => {
   if (response.status === 200) {
-    const html = response.data;
+    dataFromServer = response.data;
 
     // extraxt url-images from server respond
-    arrayUrlImages = html.match(regex);
+    arrayUrlImages = dataFromServer.match(regex);
     arrayOfTenImages = Object.values(arrayUrlImages);
   } else {
     console.log(error);
   }
 
-  // looping over array, get 10 imgs, remove src= && "", save url in new array
-  for (let i = 1; i < 10; i++) {
+  // looping over array, get first 10 imgs, remove src= && "", save url in new array
+  for (let i = 0; i < 10; i++) {
     arrayConvertObjToString[i] = arrayOfTenImages[i].substring(
       5,
       arrayOfTenImages[i].length - 1,
@@ -33,7 +34,12 @@ get('https://memegen-link-examples-upleveled.netlify.app/').then((response) => {
 
     //create a writable stream and save the received data stream to path
     https.get(url, (res) => {
-      const path = `./meme/0${i}.jpg`;
+      let path;
+
+      i !== 9
+        ? (path = `./meme/0${i + 1}.jpg`)
+        : (path = `./meme/${i + 1}.jpg`);
+
       const writeStream = fs.createWriteStream(path);
       res.pipe(writeStream);
 
