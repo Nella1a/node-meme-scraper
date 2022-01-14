@@ -7,9 +7,7 @@
   "author": "Nella1a <m.allen@gmx.at>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.24.0",
-    "fs": "^0.0.1-security",
-    "request": "^2.88.2"
+    "axios": "^0.24.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
