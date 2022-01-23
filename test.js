@@ -29,17 +29,21 @@ get('https://memegen-link-examples-upleveled.netlify.app/')
 
       // create a writable stream and save the received data stream to path
       https.get(url, (res) => {
-        let path = `./meme`;
+        let path = `./meme/`;
 
         // check if directory exists
-        if (!fs.existsSync(path)) {
-          fs.mkdirSync(path);
-        }
-
-        if (i !== 9) {
-          path = `./meme/0${i + 1}.jpg`;
+        if (fs.existsSync(path)) {
+          console.log('Directory exists!');
+          i !== 9
+            ? (path = `./meme/0${i + 1}.jpg`)
+            : (path = `./meme/${i + 1}.jpg`);
         } else {
-          path = `./meme/${i + 1}.jpg`;
+          fs.mkdirSync(path);
+          console.log('Make not found.');
+
+          i !== 9
+            ? (path = `./meme/0${i + 1}.jpg`)
+            : (path = `./meme/${i + 1}.jpg`);
         }
 
         const writeStream = fs.createWriteStream(path);
@@ -47,7 +51,7 @@ get('https://memegen-link-examples-upleveled.netlify.app/')
 
         writeStream.on('finish', () => {
           writeStream.close();
-          i === 9 && console.log('Download Completed');
+          console.log('Download Completed');
         });
       });
     }
