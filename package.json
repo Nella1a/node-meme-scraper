@@ -7,7 +7,7 @@
   "author": "Nella1a <m.allen@gmx.at>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^1.6.0",
     "eslint-plugin-sonarjs": "^0.11.0"
   },
   "devDependencies": {
